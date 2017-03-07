@@ -306,7 +306,6 @@ SRC_LIST += plutommi\yunbaapp\MQTTPacket\src\MQTTConnectClient.c \
 			plutommi\yunbaapp\MQTTPacket\src\MQTTSubscribeServer.c \
 			plutommi\yunbaapp\MQTTPacket\src\MQTTUnsubscribeServer.c \
 			plutommi\yunbaapp\MQTTClient-C\src\MQTTClient.c \
-			plutommi\yunbaapp\MQTTClient-C\src\mtk\MQTTMTK.c \
 			plutommi\yunbaapp\MQTTClient-C\src\mtk\mtk_socket.c
              
 ifneq ($(filter __UNIFIED_COMPOSER_SUPPORT__ , $(strip $(MODULE_DEFS))),)                  
@@ -1006,6 +1005,8 @@ INC_DIR = applib\inet\engine\include \
           plutommi\mmi\SmsbtmapcApp\SmsbtmapcAppInc \
           plutommi\MMI\BTNotification\BTNotificationInc \
           plutommi\ikapp \
+          plutommi\yunbaapp\MQTTClient-C\src\mtk\src \
+          plutommi\yunbaapp\MQTTClient-C\src\mtk\src\mtk \
           plutommi\MMI\BtRemoteCapture 
 
 ifneq ($(filter __MMI_BT_DIALER_SUPPORT__ , $(strip $(MODULE_DEFS))),)
@@ -1067,4 +1068,3 @@ SRC_PATH += plutommi\yunbaapp\MQTTClient-C\src\mtk
 ifneq ($(filter  __MMI_LINE_IN__, $(strip $(MODULE_DEFS))),)
 INC_DIR += plutommi\mtkapp\Linein\LineinInc
 endif
-

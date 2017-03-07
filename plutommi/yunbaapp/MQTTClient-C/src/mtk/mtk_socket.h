@@ -1,3 +1,4 @@
+
 #ifndef __MTK_SOCKET_H__
 #define __MTK_SOCKET_H__
 
@@ -42,8 +43,8 @@ typedef struct _mtk_soc_mngr {
 	sockaddr_struct addr;
 	S32  error;
 	S32  req_id;
-	S32  soc_id;
-	S8   get_ip;
+	S32  soc_id; //总是存在数据类型转换的问题，mbd
+	S8   get_ip; //是否正在解析域名, threedo_dns_state
 } MTK_SOC_MNGR;
 
 
@@ -66,3 +67,4 @@ extern S32 mtk_socket_write(MTK_SOC_MNGR *pSoc, void *buffer, unsigned int lengt
 extern S32 mtk_socket_read(MTK_SOC_MNGR *pSoc, void *buffer, unsigned int length);
 
 #endif/*__MTK_SOCKET_H__*/
+

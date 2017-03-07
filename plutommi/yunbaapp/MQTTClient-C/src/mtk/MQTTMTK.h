@@ -52,14 +52,14 @@
 #include "Mmi_rp_srv_sms_def.h"
 #include "mmi_rp_app_usbsrv_def.h"
 #include "mmi_rp_app_scr_locker_def.h"
-// #include "mmi_rp_app_threedo_def.h"
+#include "mmi_rp_app_threedo_def.h"
 
-// #include "ThreedoGprot.h"
-// #include "threedo_errno.h"
-// #include "threedo_media.h"
+#include "ThreedoGprot.h"
+#include "threedo_errno.h"
+#include "threedo_media.h"
 #include "mtk_socket.h"
-// #include "threedo_parse.h"
-// #include "threedo_ftm.h"
+#include "threedo_parse.h"
+#include "threedo_ftm.h"
 //#include "mtk_socket.h"
 
 #if defined(WIN32)
