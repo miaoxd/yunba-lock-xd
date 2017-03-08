@@ -2,8 +2,7 @@
 
 THREEDO_PATH=plutommi\MtkApp\Threedo
 
-SRC_LIST = $(strip $(THREEDO_PATH))\ThreedoSrc\Threedo_main.c \
-           $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_crc.c \
+SRC_LIST = $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_crc.c \
            $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_encrypt.c \
            $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_ftm.c \
 		   $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_sdtm.c \
@@ -12,7 +11,7 @@ SRC_LIST = $(strip $(THREEDO_PATH))\ThreedoSrc\Threedo_main.c \
            $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_win32.c \
            $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_parse.c \
            $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_window.c \
-            $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_task.c
+           $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_task.c
 
 #  Define include path lists to INC_DIR
 INC_DIR = $(strip $(THREEDO_PATH))\ThreedoInc

@@ -266,8 +266,8 @@ static void messageArrived(MessageData* md)
 		kal_wsprintf(buf, "messge arrived:");
 		app_ucs2_strcat((kal_int8 *)buf, mg);
 		mmi_popup_display_simple(buf, MMI_EVENT_SUCCESS, GRP_ID_ROOT, NULL);
-		// mqttdeo_send_message(MSG_ID_THREEDO_FILE_DOWNLOAD_REQ, 
-		// (void *)mg, MOD_MQTT, MOD_THREEDO, 0);
+		mqttdeo_send_message(MSG_ID_THREEDO_FILE_DOWNLOAD_REQ, 
+		(void *)mg, MOD_MQTT, MOD_THREEDO, 0);
 	} else {
 #if defined(__DRV_FLASHLIGHT_SUPPORT__)
 		extern void drv_flashlight_switch(MMI_BOOL bStatus);
