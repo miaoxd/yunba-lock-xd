@@ -292,21 +292,6 @@ SRC_LIST += plutommi\ikapp\yxbasicapp.c \
             plutommi\ikapp\yxgpsproc.c \
             plutommi\ikapp\yxdataproc.c \
             plutommi\ikapp\yxappmain.c
-
-SRC_LIST += plutommi\yunbaapp\MQTTPacket\src\MQTTConnectClient.c \
-			plutommi\yunbaapp\MQTTPacket\src\MQTTDeserializePublish.c \
-			plutommi\yunbaapp\MQTTPacket\src\MQTTFormat.c \
-			plutommi\yunbaapp\MQTTPacket\src\MQTTSerializePublish.c \
-			plutommi\yunbaapp\MQTTPacket\src\MQTTSubscribeClient.c \
-			plutommi\yunbaapp\MQTTPacket\src\MQTTUnsubscribeClient.c \
-			plutommi\yunbaapp\MQTTPacket\src\MQTTConnectServer.c \
-			plutommi\yunbaapp\MQTTPacket\src\MQTTDeserializePublish2.c \
-			plutommi\yunbaapp\MQTTPacket\src\MQTTPacket.c \
-			plutommi\yunbaapp\MQTTPacket\src\MQTTSerializePublish2.c \
-			plutommi\yunbaapp\MQTTPacket\src\MQTTSubscribeServer.c \
-			plutommi\yunbaapp\MQTTPacket\src\MQTTUnsubscribeServer.c \
-			plutommi\yunbaapp\MQTTClient-C\src\MQTTClient.c \
-			plutommi\yunbaapp\MQTTClient-C\src\mtk\mtk_socket.c
              
 ifneq ($(filter __UNIFIED_COMPOSER_SUPPORT__ , $(strip $(MODULE_DEFS))),)                  
 SRC_LIST += plutommi\mmi\UnifiedComposer\UnifiedComposerSrc\UcPcrdApp.c \
@@ -1005,8 +990,7 @@ INC_DIR = applib\inet\engine\include \
           plutommi\mmi\SmsbtmapcApp\SmsbtmapcAppInc \
           plutommi\MMI\BTNotification\BTNotificationInc \
           plutommi\ikapp \
-          plutommi\yunbaapp\MQTTClient-C\src\mtk\src \
-          plutommi\yunbaapp\MQTTClient-C\src\mtk\src\mtk \
+          plutommi\threedo\ThreedoInc \
           plutommi\MMI\BtRemoteCapture 
 
 ifneq ($(filter __MMI_BT_DIALER_SUPPORT__ , $(strip $(MODULE_DEFS))),)
@@ -1061,9 +1045,6 @@ COMP_DEFS = MMI_ON_HARDWARE_P  \
 
 SRC_PATH += plutommi\AppCore\Ucm
 SRC_PATH += plutommi\ikapp
-SRC_PATH += plutommi\yunbaapp\MQTTPacket\src
-SRC_PATH += plutommi\yunbaapp\MQTTClient-C\src
-SRC_PATH += plutommi\yunbaapp\MQTTClient-C\src\mtk
 
 ifneq ($(filter  __MMI_LINE_IN__, $(strip $(MODULE_DEFS))),)
 INC_DIR += plutommi\mtkapp\Linein\LineinInc

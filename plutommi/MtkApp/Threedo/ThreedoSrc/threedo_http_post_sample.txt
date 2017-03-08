@@ -1,0 +1,83 @@
+
+reference:
+[1] https://www.imququ.com/post/four-ways-to-post-data-in-http.html#toc-1
+[2] http://yidongkaifa.iteye.com/blog/1737295
+
+
+sample: 
+
+POST /upload HTTP/1.1
+Host: f2.yunba.io:8888
+Connection: keep-alive
+Content-Length: 5541
+Origin: http://f2.yunba.io:8888
+User-Agent: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary8C1CVVrNBEwBnpE7
+Accept: */*
+DNT: 1
+Referer: http://f2.yunba.io:8888/files/example.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
+
+------WebKitFormBoundary8C1CVVrNBEwBnpE7
+Content-Disposition: form-data; name="path"
+
+Ado5513c6160.amr
+------WebKitFormBoundary8C1CVVrNBEwBnpE7
+Content-Disposition: form-data; name="file"; filename="Ado5513c6160.amr"
+Content-Type: application/octet-stream
+
+[here is the upload file content......]
+------WebKitFormBoundary8C1CVVrNBEwBnpE7
+Content-Disposition: form-data; name="signature"
+
+dc460ef6933445e82253fc3448fe7b8eca6b451c
+------WebKitFormBoundary8C1CVVrNBEwBnpE7--
+
+HTTP/1.1 200 OK
+Date: Thu, 26 Mar 2015 08:41:24 GMT
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 27
+ETag: W/"1b-b1794feb"
+X-Via: 1.1 ccsskan113017:8101 (Cdn Cache Server V2.0)
+Connection: keep-alive
+
+{"path":"Ado5513c6160.amr"}
+
+
+
+POST /upload HTTP/1.1
+Host: f2.yunba.io:8888
+Connection: keep-alive
+Content-Length: 5531
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary123456785513faaa
+
+------WebKitFormBoundary123456785513faaa
+Content-Disposition: form-data; name="path"
+
+Ado5513faa90.amr
+------WebKitFormBoundary123456785513faaa
+Content-Disposition: form-data; name="file"; filename="Ado5513faa90.amr"
+Content-Type: application/octet-stream
+
+[here is file content data.................]
+------WebKitFormBoundary123456785513faaa
+Content-Disposition: form-data; name="signature"
+
+this is MD5 data..............
+------WebKitFormBoundary123456785513faaa--
+
+HTTP/1.1 200 OK
+Date: Thu, 26 Mar 2015 12:23:36 GMT
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 27
+ETag: W/"1b-30942d42"
+X-Via: 1.1 ccsskan113017:8101 (Cdn Cache Server V2.0)
+Connection: keep-alive
+
+{"path":"Ado5513faa90.amr"}
+
+
+
