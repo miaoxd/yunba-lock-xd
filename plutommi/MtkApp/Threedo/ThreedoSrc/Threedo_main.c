@@ -35,6 +35,7 @@
 
 #include "MMI_include.h"
 
+#include "SmsSrvGprot.h"
 #include "BootupSrvGprot.h"
 #include "SimCtrlSrvGprot.h"
 #include "fs_gprot.h"
@@ -997,7 +998,7 @@ S32 threedo_make_call(const char *pnumber, S32 simid)
     app_asc_str_to_ucs2_wcs(Hotline_number, (S8*)pnumber);
 	
 #ifndef __MMI_DUAL_SIM_MASTER__ 
-	MakeCall(Hotline_number);
+	// MakeCall(Hotline_number);
 #else
     if (!srv_nw_usab_is_any_network_available())
     {

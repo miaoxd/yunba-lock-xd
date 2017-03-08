@@ -62,7 +62,7 @@
 /******************** Timer resource IDs - begin ********************/
 typedef enum
 {
-    THREEDO_TIMER_PUBLIC_ID = 32854 + 1, /* BASE_ID + 1 */
+    THREEDO_TIMER_PUBLIC_ID = 32858 + 1, /* BASE_ID + 1 */
     THREEDO_TIMER_KEEP_ACTIVE,
     THREEDO_TIMER_SOCKET_RECONN,
     THREEDO_TIMER_WAITING_ACK,
@@ -77,7 +77,7 @@ typedef enum
 /******************** Events resource IDs - begin ********************/
 typedef enum
 {
-    EVT_ID_THREEDO_PRE_EXEC = 32854 + 1, /* BASE_ID + 1 */
+    EVT_ID_THREEDO_PRE_EXEC = 32858 + 1, /* BASE_ID + 1 */
     EVT_ID_THREEDO_PRE_EXIT,
     EVT_ID_THREEDO_EXITED,
     EVT_ID_THREEDO_DOMAIN_NAME_RESOLUTION,

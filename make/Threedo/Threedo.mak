@@ -2,7 +2,8 @@
 
 THREEDO_PATH=plutommi\MtkApp\Threedo
 
-SRC_LIST = $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_crc.c \
+SRC_LIST = $(strip $(THREEDO_PATH))\ThreedoSrc\Threedo_main.c \
+           $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_crc.c \
            $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_encrypt.c \
            $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_ftm.c \
 		   $(strip $(THREEDO_PATH))\ThreedoSrc\threedo_sdtm.c \
