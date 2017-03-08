@@ -35,6 +35,8 @@ static void MqttDemoTask(task_entry_struct *task_entry_ptr)
     kal_get_my_task_index(&my_index);
     self = (int)kal_get_current_task();
 
+	TRACE("MqttDemoTask....");
+
     while (1)
     {
         /* replace by stack sharing, add by mingyin*/

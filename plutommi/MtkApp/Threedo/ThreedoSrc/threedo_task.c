@@ -20,6 +20,8 @@ static void ThreedoTask(task_entry_struct *task_entry_ptr)
     kal_get_my_task_index(&my_index);
     self = (int)kal_get_current_task();
 
+	TD_TRACE("ThreedoTask....");
+
     while (1)
     {
         /* replace by stack sharing, add by mingyin*/
@@ -30,6 +32,7 @@ static void ThreedoTask(task_entry_struct *task_entry_ptr)
         {		
         case MSG_ID_THREEDO_TASK_START_REQ:
 			TD_TRACE("[task] MSG_ID_THREEDO_TASK_START_REQ");
+			threedo_send_message(MSG_ID_MQTT_START, NULL, MOD_MMI, MOD_MQTT, 0);
 			break;
 			
 		case MSG_ID_THREEDO_TASK_STOP_REQ:
