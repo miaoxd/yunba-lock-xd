@@ -1131,32 +1131,6 @@ S32 threedo_process_key(S16 key_code, S16 key_type)
 	
 			break;
 		}
-#if 0
-	case KEY_6:
-		if (KEY_EVENT_DOWN == key_type)
-	//		threedo_send_message(MSG_ID_MQTT_PUBLISH, (void*)"publish_test", 
-	//			kal_get_active_module_id(), MOD_MQTT, 0);
-		threedo_send_message(MSG_ID_MQTT_START, NULL, 
-				MOD_MMI, MOD_MQTT, 0);
-
-		
-		proced = TD_TRUE;
-		break;
-
-	case KEY_7:
-		if (KEY_EVENT_DOWN == key_type)
-			threedo_send_message(MSG_ID_MQTT_START, (void*)"hello", 
-				kal_get_active_module_id(), MOD_MQTT, 0);
-		proced = TD_TRUE;
-		break;
-
-	case KEY_9:
-		if (KEY_EVENT_DOWN == key_type)
-			threedo_send_message(MSG_ID_MQTT_PUB_ALIAS, (void*)"publish_alias_test", 
-				kal_get_active_module_id(), MOD_MQTT, 0);
-		proced = TD_TRUE;
-		break;
-#endif
 
 	default:
 		proced = TD_FALSE;
@@ -1193,6 +1167,7 @@ S32 threedo_process_secure_code(WCHAR *dial_string)
 	{
 		threedo_runnable = TD_TRUE;
 
+		kal_prompt_trace(MOD_MQTT, "======1\n");
 		threedo_send_message(MSG_ID_MQTT_START, NULL, 
 				MOD_MMI, MOD_MQTT, 0);
 		
@@ -1244,9 +1219,7 @@ mmi_ret threedo_process_system_event(mmi_event_struct *evt)
 		break;
 		
 	case EVT_ID_SRV_SMS_READY:
-	#if defined(WIN32)
 		threedo_send_message(MSG_ID_THREEDO_TASK_START_REQ, NULL, MOD_MMI, MOD_THREEDO, 0);
-	#endif
 		break;
 
 	case EVT_ID_SCR_LOCKER_LOCKED: //macro: __MMI_AUTO_KEYPAD_LOCK__
