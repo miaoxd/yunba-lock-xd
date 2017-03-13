@@ -259,27 +259,9 @@ static void messageArrived(MessageData* md)
 	sprintf(tp, "%.*s", md->topicName->lenstring.len, md->topicName->lenstring.data);
 	memset(mg, 0x00, 100);
 	memcpy(mg, message->payload, (int)message->payloadlen);
-	if (strcmp(tp, MqttTopic) == 0 && checkValidMsgForThreedo(mg)) {
-	//	showStringOnLCD("messge arrived");
-		WCHAR buf[128];
-		memset(buf, 0, sizeof(buf));
-		kal_wsprintf(buf, "messge arrived:");
-		app_ucs2_strcat((kal_int8 *)buf, mg);
-		mmi_popup_display_simple(buf, MMI_EVENT_SUCCESS, GRP_ID_ROOT, NULL);
-		mqttdeo_send_message(MSG_ID_THREEDO_FILE_DOWNLOAD_REQ, 
-		(void *)mg, MOD_MQTT, MOD_THREEDO, 0);
-	} else {
-#if defined(__DRV_FLASHLIGHT_SUPPORT__)
-		extern void drv_flashlight_switch(MMI_BOOL bStatus);
 
-		MMI_BOOL status =  (strncmp(mg, "on", strlen("on")) == 0) ?  MMI_TRUE : MMI_FALSE;
-		TRACE("normal msg arrived: %s, %i; %i", mg, status, strlen(mg));
-		drv_flashlight_switch(status);
-#endif
-	}
-
-//	TRACE("topic: %.*s",  md->topicName->lenstring.len, md->topicName->lenstring.data);
-//	TRACE("Message: %.*s", (int)message->payloadlen, (char*)message->payload);
+	TRACE("topic: %.*s",  md->topicName->lenstring.len, md->topicName->lenstring.data);
+	TRACE("Message: %.*s", (int)message->payloadlen, (char*)message->payload);
 }
 
 int mqtt_conn_start(const char *topic, const char *alias)

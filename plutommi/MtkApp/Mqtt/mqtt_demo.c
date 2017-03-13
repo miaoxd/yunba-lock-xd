@@ -48,7 +48,7 @@ static void MqttDemoTask(task_entry_struct *task_entry_ptr)
 		case MSG_ID_MQTT_START:
 			{
 				TRACE("mqtt start ");
-				get_register_info("5316bd7179b6570f2ca6e20b", "d85681e509a5c7021cedd4e8aae18714");
+				get_register_info("56a0a88c4407a3cd028ac2fe", "2000000001");
 				break;
 			}
 
@@ -58,12 +58,12 @@ static void MqttDemoTask(task_entry_struct *task_entry_ptr)
 
 		case MSG_ID_MQTT_CONN:
 			TRACE("mqtt start ");
-			mqtt_conn_start("go", "Jerry");
+			mqtt_conn_start("2000000001", "2000000001");
 			break;
 
 		case MSG_ID_MQTT_SUB:
 			TRACE("mqtt sub ");
-			mqtt_sub_start("go");
+			mqtt_sub_start("2000000001");
 			break;
 
 		case MSG_ID_MQTT_PUBLISH:
