@@ -119,7 +119,7 @@ int mqtt_keepalive();
 
 void MQTTkeepalive_start();
 
-int mqtt_conn_start(const char *topic, const char *alias);
+int mqtt_conn_start();
 
 int mqtt_sub_start(const char *topic);
 
