@@ -254,18 +254,17 @@ static void messageArrived(MessageData* md)
 
 	TRACE("Message: %s", (char*)message->payload);
 
-	//lock_buzz(100);
-	//if (strcmp(message->payload, "{\"cmd\":\"report\"}") == 0) {
-	//	TRACE("report");
-	//	lock_report();
-	//} else if (strcmp(message->payload, "{\"cmd\":\"unlock\"}") == 0) {
-	//	TRACE("unlock");
-	//	lock_unlock();
-	//} else if (strcmp(message->payload, "high") == 0) {
-	//	TRACE("high");
-	//} else if (strcmp(message->payload, "low") == 0) {
-	//	TRACE("low");
-	//}
+	yblock_buzz(100);
+	if (strcmp(message->payload, "{\"cmd\":\"report\"}") == 0) {
+		TRACE("report");
+		yblock_report();
+	} else if (strcmp(message->payload, "{\"cmd\":\"unlock\"}") == 0) {
+		TRACE("unlock");
+		yblock_unlock();
+	} else if (strcmp(message->payload, "adjust") == 0) {
+		TRACE("adjust");
+		yblock_adjust();
+	}
 }
 
 int mqtt_conn_start()
@@ -463,6 +462,8 @@ int get_register_info(const char *appkey, const char *deviceid)
 	strcpy(DeviceId, deviceid);
 	ReConnectgNetwork("reg.yunba.io", 8383, 0);
 	MQTT_DEMO_State = ST_GET_REG_SERVER_IP;
+
+	TRACE("get_register_info: mqttdemo_retry_cb");
 	StartTimer(MQTTDEMO_RETRY_TIMER, 70000, mqttdemo_retry_cb);
 
 	return 0;
@@ -660,6 +661,8 @@ U8 host_name_cb(void *evt)
 		//_td_file_trans_check_and_clear_task();
 		tdFttmCntx->sock.get_ip = THREEDO_DNS_FAILED;	
 		//	_td_fttm_start_block_timer(TD_FTTM_SOC_BLOCK_TIME);
+		TRACE("host_name_cb: mqttdemo_retry_cb");
+		StopTimer(MQTTDEMO_RETRY_TIMER);
 		StartTimer(MQTTDEMO_RETRY_TIMER, 3000, mqttdemo_retry_cb);
 	}
 
@@ -838,6 +841,7 @@ begin:
 
 			if (MQTT_DEMO_State == ST_MQTT_CONN) {
 				TRACE("------->connected.\n");
+				yblock_buzz(200);
 				MQTT_DEMO_State = ST_MQTT_RUNNING;
 				mqttDemoSndMsg(MSG_ID_MQTT_SET_ALIAS, NULL);
 			}

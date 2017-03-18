@@ -27,17 +27,6 @@ static S32 socket_event_handle(ilm_struct *ilm)
 
 void s_send_message(U16 msg_id, void *req, int mod_src, int mod_dst, int sap);
 
-static kal_timerid mTestTimer = 0;
-static const kal_uint8 gpio1_pin = 1;
-
-static void mTestTimerCallback(void *arg)
-{
-	static kal_uint32 count = 0;
-	count++;
-	TRACE("my timer is expired. %d", count);
-	GPIO_WriteIO(count % 2, gpio1_pin);
-}
-
 static void MqttDemoTask(task_entry_struct *task_entry_ptr)
 {
    ilm_struct ilm;
@@ -49,8 +38,6 @@ static void MqttDemoTask(task_entry_struct *task_entry_ptr)
 
 	TRACE("MqttDemoTask....");
 
-	mTestTimer = kal_create_timer("mqtt");
-	kal_set_timer(mTestTimer, mTestTimerCallback, NULL, 300, 300);
 	yblock_init();
 
     while (1)
@@ -85,7 +72,8 @@ static void MqttDemoTask(task_entry_struct *task_entry_ptr)
 
 		case MSG_ID_MQTT_START:
 			TRACE("MSG_ID_MQTT_START");
-			//get_register_info(APPKEY, DEVICE_ID);
+			yblock_buzz(200);
+			get_register_info(APPKEY, DEVICE_ID);
 			break;
 
 		case MSG_ID_MQTT_KEEPALIVE:
@@ -140,8 +128,7 @@ kal_bool MqttDemo_create(comptask_handler_struct **handle)
 		NULL,			/* task initialization function */
 		NULL,		/* task configuration function */
 		NULL,			/* task reset handler */
-		NULL			/* task ter
-		ation handler */
+		NULL			/* task termination handler */
 	};
 
 	*handle = (comptask_handler_struct *)&idle_handler_info;
