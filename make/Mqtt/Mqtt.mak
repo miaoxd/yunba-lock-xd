@@ -3,6 +3,7 @@
 MQTT_PATH=plutommi\MtkApp\Mqtt
 
 SRC_LIST = $(strip $(MQTT_PATH))\mqtt_demo.c \
+           $(strip $(MQTT_PATH))\yunba_lock.c \
            $(strip $(MQTT_PATH))\MQTTPacket\src\MQTTConnectClient.c \
            $(strip $(MQTT_PATH))\MQTTPacket\src\MQTTDeserializePublish.c \
            $(strip $(MQTT_PATH))\MQTTPacket\src\MQTTFormat.c \
