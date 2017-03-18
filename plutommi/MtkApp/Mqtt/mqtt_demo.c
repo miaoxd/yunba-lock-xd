@@ -61,8 +61,21 @@ static void MqttDemoTask(task_entry_struct *task_entry_ptr)
 
 		switch (ilm.msg_id)
         {
-		case 0x2345:
-			TRACE("recived interrupt message.");
+        case MSG_ID_YBLOCK_STATUS_ON:
+			TRACE("MSG_ID_YBLOCK_STATUS_ON");
+			yblock_status_notify(1);
+			break;
+		case MSG_ID_YBLOCK_STATUS_OFF:
+			TRACE("MSG_ID_YBLOCK_STATUS_OFF");
+			yblock_status_notify(0);
+			break;
+		case MSG_ID_YBLOCK_STEP_ON:
+			TRACE("MSG_ID_YBLOCK_STEP_ON");
+			yblock_step_notify(1);
+			break;
+		case MSG_ID_YBLOCK_STEP_OFF:
+			TRACE("MSG_ID_YBLOCK_STEP_OFF");
+			yblock_step_notify(0);
 			break;
 
 		case MSG_ID_MQTT_CLOSE:

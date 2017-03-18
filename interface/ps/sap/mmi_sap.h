@@ -2053,6 +2053,10 @@
 	MSG_ID_MQTT_PUBLISH,
 	MSG_ID_MQTT_PUB_ALIAS,
 	MSG_ID_MQTT_CLOSE,
+	MSG_ID_YBLOCK_STATUS_ON,
+	MSG_ID_YBLOCK_STATUS_OFF,
+	MSG_ID_YBLOCK_STEP_ON,
+	MSG_ID_YBLOCK_STEP_OFF,
     /* yunba, end */
         
    /*---------------MMI_MSG_CODE_END---------------------*/
