@@ -72,7 +72,7 @@ static void MqttDemoTask(task_entry_struct *task_entry_ptr)
 
 		case MSG_ID_MQTT_START:
 			TRACE("MSG_ID_MQTT_START");
-			yblock_buzz(200);
+			yblock_buzz(300);
 			get_register_info(APPKEY, DEVICE_ID);
 			break;
 

@@ -254,7 +254,6 @@ static void messageArrived(MessageData* md)
 
 	TRACE("Message: %s", (char*)message->payload);
 
-	yblock_buzz(100);
 	if (strcmp(message->payload, "{\"cmd\":\"report\"}") == 0) {
 		TRACE("report");
 		yblock_report();
@@ -841,7 +840,7 @@ begin:
 
 			if (MQTT_DEMO_State == ST_MQTT_CONN) {
 				TRACE("------->connected.\n");
-				yblock_buzz(200);
+				yblock_buzz(300);
 				MQTT_DEMO_State = ST_MQTT_RUNNING;
 				mqttDemoSndMsg(MSG_ID_MQTT_SET_ALIAS, NULL);
 			}
