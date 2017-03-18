@@ -260,6 +260,9 @@ static void messageArrived(MessageData* md)
 	} else if (strcmp(message->payload, "{\"cmd\":\"unlock\"}") == 0) {
 		TRACE("unlock");
 		yblock_unlock();
+	} else if (strcmp(message->payload, "{\"cmd\":\"buzzer\"}") == 0) {
+		TRACE("buzzer");
+		yblock_buzz(500);
 	} else if (strcmp(message->payload, "adjust") == 0) {
 		TRACE("adjust");
 		yblock_adjust();
