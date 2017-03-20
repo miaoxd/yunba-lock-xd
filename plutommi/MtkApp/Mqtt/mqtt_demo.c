@@ -48,6 +48,15 @@ static void MqttDemoTask(task_entry_struct *task_entry_ptr)
 
 		switch (ilm.msg_id)
         {
+        case MSG_ID_L4C_NBR_CELL_INFO_REG_CNF:
+			TRACE("MSG_ID_L4C_NBR_CELL_INFO_REG_CNF");
+			break;
+		case MSG_ID_L4C_NBR_CELL_INFO_IND:
+			TRACE("MSG_ID_L4C_NBR_CELL_INFO_IND");
+//			yblock_dereg_cell_info();
+			yblock_handle_cell_info(ilm.local_para_ptr);
+			break;
+			
         case MSG_ID_YBLOCK_STATUS_ON:
 			TRACE("MSG_ID_YBLOCK_STATUS_ON");
 			yblock_status_notify(1);
