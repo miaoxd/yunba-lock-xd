@@ -257,7 +257,7 @@ static void messageArrived(MessageData* md)
 	if (strcmp(message->payload, "{\"cmd\":\"report\"}") == 0) {
 		TRACE("report");
 		yblock_report();
-		yblock_reg_cell_info();
+//		yblock_reg_cell_info();
 	} else if (strcmp(message->payload, "{\"cmd\":\"unlock\"}") == 0) {
 		TRACE("unlock");
 		yblock_unlock();
