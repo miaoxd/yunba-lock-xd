@@ -3,7 +3,7 @@
 #include "MQTTClient.h"
 
 const char *APPKEY = "56a0a88c4407a3cd028ac2fe";
-const char *DEVICE_ID = "2000000001";
+const char *DEVICE_ID = "2000000002";
 
 static S32 socket_event_handle(ilm_struct *ilm)
 {
@@ -48,6 +48,11 @@ static void MqttDemoTask(task_entry_struct *task_entry_ptr)
 
 		switch (ilm.msg_id)
         {
+        case MSG_ID_YBLOCK_BTN_DOWN:
+			TRACE("MSG_ID_YBLOCK_BTN_DOWN");
+			yblock_btn_down();
+			break;
+			
         case MSG_ID_L4C_NBR_CELL_INFO_REG_CNF:
 			TRACE("MSG_ID_L4C_NBR_CELL_INFO_REG_CNF");
 			break;
@@ -96,7 +101,7 @@ static void MqttDemoTask(task_entry_struct *task_entry_ptr)
 
 		case MSG_ID_MQTT_SET_ALIAS:
 			TRACE("MSG_ID_MQTT_SET_ALIAS");
-			publish_message(",yali", DEVICE_ID, strlen(DEVICE_ID));
+			publish_message(",yali", QOS1, DEVICE_ID, strlen(DEVICE_ID));
 			break;
 			
 		default:

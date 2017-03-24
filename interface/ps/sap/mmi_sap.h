@@ -2057,6 +2057,7 @@
 	MSG_ID_YBLOCK_STATUS_OFF,
 	MSG_ID_YBLOCK_STEP_ON,
 	MSG_ID_YBLOCK_STEP_OFF,
+	MSG_ID_YBLOCK_BTN_DOWN,
     /* yunba, end */
         
    /*---------------MMI_MSG_CODE_END---------------------*/

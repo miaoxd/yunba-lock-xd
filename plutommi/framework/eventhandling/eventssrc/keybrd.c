@@ -4531,6 +4531,28 @@ static MMI_BOOL is_combo_key(S16 mmi_key_code)
  * RETURNS
  *  void
  *****************************************************************************/
+/* add by yunba */
+static void yunba_send_message(U16 msg_id, void *req, int mod_src, int mod_dst, int sap)
+{
+	/*----------------------------------------------------------------*/
+	/* Local Variables												  */
+	/*----------------------------------------------------------------*/
+	ilm_struct *ilm_send;
+	
+	/*----------------------------------------------------------------*/
+	/* Code Body													  */
+	/*----------------------------------------------------------------*/
+	ilm_send = allocate_ilm(mod_src);	
+	ilm_send->src_mod_id = mod_src;
+	ilm_send->dest_mod_id = (module_type)mod_dst;
+	ilm_send->sap_id = sap;
+	ilm_send->msg_id = (msg_type) msg_id;
+	ilm_send->local_para_ptr = (local_para_struct*) req;
+	ilm_send->peer_buff_ptr = (peer_buff_struct*) NULL;    
+	msg_send_ext_queue(ilm_send);	 
+}
+/* add by yunba */
+
 static void dev_key_handle(dev_key_evt_struct *dev_evt_p)
 {
     /*----------------------------------------------------------------*/
@@ -4544,6 +4566,16 @@ static void dev_key_handle(dev_key_evt_struct *dev_evt_p)
     /*----------------------------------------------------------------*/
     /* Code Body                                                      */
     /*----------------------------------------------------------------*/
+
+	/* add by yunba */
+	kal_prompt_trace(MOD_MMI, "mmi_key_handle: %d, %d", dev_evt_p->device_key_code, dev_evt_p->device_key_type);
+	if (dev_evt_p->device_key_code == DEVICE_KEY_UNDERSCORE &&
+		dev_evt_p->device_key_type == KEY_EVENT_DOWN) {
+		kal_prompt_trace(MOD_MMI, "mmi_key_handle: DEVICE_KEY_UNDERSCORE");
+//		yunba_send_message(MSG_ID_YBLOCK_BTN_DOWN, 0, MOD_MMI, MOD_MQTT, 0);
+	}
+	/* add by yunba */
+
     MMI_TRACE(PLUTO_FW_TRC_KEY, TRC_MMI_FRM_KEY_DEVICE_KEY_INFO, dev_evt_p->device_key_code, dev_evt_p->device_key_type);
     pre_process_dev_evt(dev_evt_p, dev_evt, &len);
     for (i = 0; i < len; i++)
@@ -4555,7 +4587,7 @@ static void dev_key_handle(dev_key_evt_struct *dev_evt_p)
         mmi_key_event_frm.is_clear     = MMI_FALSE;        
         
         /* get framework level mmi key events */
-        get_mmi_key_events(&dev_evt[i], &mmi_key_event_frm);
+        get_mmi_key_events(&dev_evt[i], &mmi_key_event_frm);		
         if( MMI_TRUE == is_valid_mmi_key_event(
             mmi_key_event_frm.mmi_key_code,
             mmi_key_event_frm.mmi_key_type))

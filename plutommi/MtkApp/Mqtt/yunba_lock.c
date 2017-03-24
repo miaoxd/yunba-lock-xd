@@ -8,10 +8,11 @@
 #endif
 #include "Eint.h"
 #include "nbr_public_struct.h"
+#include "kbd_table.h"
+
 
 #define GPIO_MOTOR GPIO_PORT_2
 #define GPIO_BUZZER GPIO_PORT_3
-#define SW_DEBOUNCE 3
 
 #define MAX_CELL_INFO 6
 
@@ -37,6 +38,7 @@ static const kal_uint8 CHECK_STEP_EINT_NO = 1;
 
 static kal_bool g_eint_level_status = LEVEL_LOW;
 static kal_bool g_eint_level_step = LEVEL_LOW;
+
 
 static LOCK_STATUS g_lock_status = LOCK_STATUS_LOCKED;
 static int g_lock_step = 0;
@@ -69,7 +71,6 @@ static void yblock_eint_status(void)
         s_send_message(MSG_ID_YBLOCK_STATUS_ON, 0, MOD_DRV_HISR, MOD_MQTT, 0);
     }
     g_eint_level_status = !g_eint_level_status;
-//    EINT_SW_Debounce_Modify(CHECK_STATUS_EINT_NO, SW_DEBOUNCE);
     EINT_Set_Polarity(CHECK_STATUS_EINT_NO, g_eint_level_status);
 	EINT_UnMask(CHECK_STATUS_EINT_NO);
 }
@@ -84,7 +85,6 @@ static void yblock_eint_step(void)
     }
 
     g_eint_level_step = !g_eint_level_step;
-//    EINT_SW_Debounce_Modify(CHECK_STEP_EINT_NO, 10);
     EINT_Set_Polarity(CHECK_STEP_EINT_NO, g_eint_level_step);
 	EINT_UnMask(CHECK_STEP_EINT_NO);
 }
@@ -115,6 +115,15 @@ static int yblock_gen_report_json(char* buf, int size, const char* lock,
         lock, battery, charge, cell);
 }
 
+void yblock_btn_down(void)
+{
+	int len;
+
+	TRACE("yblock_btn_down");
+	len = _snprintf(g_buf, sizeof(g_buf), "{\"btn\":1}");
+	publish_message(DEVICE_ID, QOS0, g_buf, len);
+}
+
 void yblock_init()
 {
 #ifndef WIN32
@@ -123,7 +132,6 @@ void yblock_init()
         yblock_eint_status, KAL_TRUE);
     EINT_Set_Sensitivity(CHECK_STATUS_EINT_NO, LEVEL_SENSITIVE);
     EINT_Set_Polarity(CHECK_STATUS_EINT_NO, g_eint_level_status);
-//    EINT_SW_Debounce_Modify(CHECK_STATUS_EINT_NO, SW_DEBOUNCE);
     EINT_UnMask(CHECK_STATUS_EINT_NO);
 
     EINT_Mask(CHECK_STEP_EINT_NO);
@@ -131,9 +139,9 @@ void yblock_init()
         yblock_eint_step, KAL_TRUE);
     EINT_Set_Sensitivity(CHECK_STEP_EINT_NO, LEVEL_SENSITIVE);
     EINT_Set_Polarity(CHECK_STEP_EINT_NO, g_eint_level_step);
-//    EINT_SW_Debounce_Modify(CHECK_STEP_EINT_NO, SW_DEBOUNCE);
     EINT_UnMask(CHECK_STEP_EINT_NO);
 #endif
+
     yblock_buzz(1000);
 }
 
@@ -169,7 +177,7 @@ void yblock_report()
     len = yblock_gen_report_json(g_buf, sizeof(g_buf), lock, battery, charge,
         g_buf_cell);
 
-    publish_message(DEVICE_ID, g_buf, len);
+    publish_message(DEVICE_ID, QOS1, g_buf, len);
 }
 
 void yblock_status_notify(int value)

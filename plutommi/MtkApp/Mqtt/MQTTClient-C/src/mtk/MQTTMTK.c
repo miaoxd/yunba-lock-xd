@@ -396,12 +396,12 @@ void mqtt_publish_retry_cb(void)
 	mqttDemoSndMsg(MSG_ID_MQTT_PUBLISH, (void *)pubMsg);
 }
 
-int publish_message(const char *topic, const void *msg, U32 length)
+int publish_message(const char *topic, enum QoS qos, const void *msg, U32 length)
 {
 	int rc;
 	MQTTMessage M;
 
-	M.qos = 1;
+	M.qos = qos;
 	M.payload = (void *)msg;
 	M.id = 0;
 	M.payloadlen = length;
@@ -780,7 +780,7 @@ void MQTTkeepalive_start(void)
 {
 	TRACE("MQTTkeepalive\n");
 	mqtt_keepalive();
-	StartTimer(MQTT_KEEPALIVE_TIMER, MQTT_Client.keepAliveInterval * 500, mqtt_keepalive_timeout_cb);
+	StartTimer(MQTT_KEEPALIVE_TIMER, MQTT_Client.keepAliveInterval * 1000, mqtt_keepalive_timeout_cb);
 }
 
 int mqtt_keepalive()
